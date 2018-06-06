@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Icon, Container, Content, Button } from "native-base";
+import { connect } from "react-redux";
 import LoginForm from "../components/LoginForm";
+import { LogingIn } from "../actions/auth";
 
 class Login extends Component {
   state = {
@@ -15,13 +17,23 @@ class Login extends Component {
     });
   };
 
+  handleSubmit = () => {
+    console.log("pressed");
+    this.props.dispatch(LogingIn(this.state));
+  };
+
   render() {
     return (
       <Container style={styles.Container}>
         <Content>
           <Icon name="shopping-cart" type="FontAwesome" style={styles.Icon} />
           <LoginForm handleChangeText={this.handleChangeText} />
-          <Button primary rounded style={styles.LoginButton}>
+          <Button
+            primary
+            rounded
+            style={styles.LoginButton}
+            onPress={this.handleSubmit}
+          >
             <Text style={styles.LoginButtonText}>Login</Text>
           </Button>
           <Text style={styles.SignupText}>
@@ -71,4 +83,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default connect()(Login);
