@@ -14,6 +14,11 @@ import {
 import ProductItem from "../components/ProductItem";
 
 class Product extends Component {
+  handlePressItem = () => {
+    console.log("pressed");
+    this.props.navigation.navigate("ProductDetail");
+  };
+
   render() {
     const navigator = this.props.navigation;
     return (
@@ -34,8 +39,8 @@ class Product extends Component {
           </Right>
         </Header>
         <Content style={styles.Content}>
-          <ProductItem />
-          <ProductItem />
+          <ProductItem handlePress={this.handlePressItem} />
+          <ProductItem handlePress={this.handlePressItem} />
         </Content>
       </Container>
     );

@@ -23,7 +23,11 @@ class ProductDetail extends Component {
         <Header style={styles.Header}>
           <Left>
             <Button transparent>
-              <Icon name="arrow-back" style={styles.BackIcon} />
+              <Icon
+                name="arrow-back"
+                style={styles.BackIcon}
+                onPress={() => this.props.navigation.goBack()}
+              />
             </Button>
           </Left>
           <Body>

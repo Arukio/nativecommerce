@@ -2,8 +2,11 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Card, CardItem, Text } from "native-base";
 
-export default () => (
-  <TouchableOpacity style={styles.ProductContainer}>
+export default ({ handlePress }) => (
+  <TouchableOpacity
+    style={styles.ProductContainer}
+    onPress={() => handlePress()}
+  >
     <Card>
       <CardItem header>
         <Image
