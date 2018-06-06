@@ -15,19 +15,16 @@ import ProductItem from "../components/ProductItem";
 
 class Product extends Component {
   render() {
+    const navigator = this.props.navigation;
     return (
       <Container>
         <Header style={styles.Header}>
-          <Left>
-            <Button transparent>
-              <Icon name="arrow-back" style={styles.BackIcon} />
-            </Button>
-          </Left>
+          <Left />
           <Body>
             <Title>Products</Title>
           </Body>
           <Right>
-            <Button transparent>
+            <Button transparent onPress={() => navigator.navigate("Cart")}>
               <Icon
                 name="shopping-cart"
                 type="FontAwesome"
