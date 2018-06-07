@@ -49,7 +49,9 @@ class Cart extends Component {
             renderItem={({ item }) => <CartItem />}
           />
         </Content>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Shipping")}
+        >
           <View style={styles.OrderContainer}>
             <Text style={styles.OrderText}>Order Details</Text>
           </View>

@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
         ...state,
         isLogin: true,
         isFetching: false,
-        user: action.payload.data
+        user: action.payload.data.user
       };
     case LOGIN_FAILED:
       return {

@@ -18,6 +18,7 @@ export default ({ handleChangeText }) => (
       <Input
         secureTextEntry
         onChangeText={password => handleChangeText(password, "password")}
+        style={{ color: "white" }}
       />
     </Item>
   </Form>

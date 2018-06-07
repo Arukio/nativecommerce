@@ -33,7 +33,18 @@ class ProductDetail extends Component {
           <Body>
             <Text>Details</Text>
           </Body>
-          <Right />
+          <Right>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.navigate("Cart")}
+            >
+              <Icon
+                name="shopping-cart"
+                type="FontAwesome"
+                style={styles.BackIcon}
+              />
+            </Button>
+          </Right>
         </Header>
         <Content>
           <ImageSlider
@@ -86,7 +97,9 @@ class ProductDetail extends Component {
             <Text style={{ padding: 5, color: "grey" }}>Review </Text>
           </View>
         </Content>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Cart")}
+        >
           <View style={styles.AddToCartContainer}>
             <Text style={styles.AddToCartText}>Add To Cart</Text>
           </View>
