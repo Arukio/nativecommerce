@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, TouchableOpacity, FlatList } from "react-native";
 import {
   Container,
   Header,
@@ -11,15 +11,38 @@ import {
   Right,
   Content
 } from "native-base";
+import { connect } from "react-redux";
 import ProductItem from "../components/ProductItem";
+import { FetchProduct } from "../actions/product";
+
+const mapStateToProps = state => ({
+  isFetching: state.product.isFetching,
+  products: state.product.products
+});
 
 class Product extends Component {
+  componentDidMount = () => {
+    this.props.dispatch(FetchProduct());
+  };
+
+  renderItemData = item => (
+    <FlatList
+      data={this.props.products}
+      renderItem={({ item }) => (
+        <ProductItem handlePress={this.handlePressItem} item={item} />
+      )}
+      keyExtractor={item => item.title.toString()}
+    />
+  );
+
   handlePressItem = () => {
     console.log("pressed");
     this.props.navigation.navigate("ProductDetail");
   };
 
   render() {
+    const { isFetching, products } = this.props;
+    const renderProduct = isFetching ? null : this.renderItemData();
     const navigator = this.props.navigation;
     return (
       <Container>
@@ -38,10 +61,7 @@ class Product extends Component {
             </Button>
           </Right>
         </Header>
-        <Content style={styles.Content}>
-          <ProductItem handlePress={this.handlePressItem} />
-          <ProductItem handlePress={this.handlePressItem} />
-        </Content>
+        <Content style={styles.Content}>{renderProduct}</Content>
       </Container>
     );
   }
@@ -59,4 +79,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Product;
+export default connect(mapStateToProps)(Product);
