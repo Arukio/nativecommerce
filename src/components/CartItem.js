@@ -40,7 +40,10 @@ export default ({
             style={styles.CartItemButton}
           />
         </View>
-        <Text style={styles.CartItemDetail} onPress={() => handleDetail()}>
+        <Text
+          style={styles.CartItemDetail}
+          onPress={() => handleDetail(data.product)}
+        >
           View Details
         </Text>
       </View>

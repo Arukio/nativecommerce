@@ -14,7 +14,7 @@ class App extends Component {
     if (isLogin) {
       return <Root />;
     }
-    return <Root />;
+    return <Auth />;
   }
 }
 

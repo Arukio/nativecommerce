@@ -14,6 +14,7 @@ import {
 import { connect } from "react-redux";
 import CartItem from "../components/CartItem";
 import { removeProduct, addQuantity, removeQuantity } from "../actions/cart";
+import { getDetail } from "../actions/product";
 
 const mapStateToProps = state => ({
   carts: state.cart.carts
@@ -24,15 +25,19 @@ class Cart extends Component {
     let index = this.props.carts.findIndex(item => item.id === id);
     this.props.dispatch(addQuantity(index));
   };
+
   handleMinus = id => {
     let index = this.props.carts.findIndex(item => item.id === id);
     this.props.dispatch(removeQuantity(index));
   };
+
   handleRemove = id => {
     let index = this.props.carts.findIndex(item => item.id === id);
     this.props.dispatch(removeProduct(index));
   };
-  handleDetail = () => {
+
+  handleDetail = data => {
+    this.props.dispatch(getDetail(data));
     this.props.navigation.navigate("ProductDetail");
   };
 
