@@ -1,8 +1,14 @@
-import { FETCH_PRODUCTS, FETCH_PRODUCTS_SUCCESS } from "../actions/product";
+import {
+  FETCH_PRODUCTS,
+  FETCH_PRODUCTS_SUCCESS,
+  GET_DETAIL,
+  REMOVE_DETAIL
+} from "../actions/product";
 
 const initialState = {
   products: [],
-  isFetching: false
+  isFetching: false,
+  productDetail: {}
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +23,16 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
         products: action.payload.data.products
+      };
+    case GET_DETAIL:
+      return {
+        ...state,
+        productDetail: action.payload.data
+      };
+    case REMOVE_DETAIL:
+      return {
+        ...state,
+        productDetail: {}
       };
     default:
       return state;

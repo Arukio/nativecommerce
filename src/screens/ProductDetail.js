@@ -13,11 +13,17 @@ import {
   H3,
   Thumbnail
 } from "native-base";
+import { connect } from "react-redux";
 import ImageSlider from "react-native-image-slider";
 import StarRating from "react-native-star-rating";
 
+const mapStateToProps = state => ({
+  product: state.product.productDetail
+});
+
 class ProductDetail extends Component {
   render() {
+    const { product } = this.props;
     return (
       <Container>
         <Header style={styles.Header}>
@@ -31,7 +37,7 @@ class ProductDetail extends Component {
             </Button>
           </Left>
           <Body>
-            <Text>Details</Text>
+            <Text>{product.title}</Text>
           </Body>
           <Right>
             <Button
@@ -48,29 +54,28 @@ class ProductDetail extends Component {
         </Header>
         <Content>
           <ImageSlider
-            images={[
-              "https://s7d2.scene7.com/is/image/dkscdn/17ADIWCLDFMQTRCRCLFS_Black_White_is/",
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSovmhKf2G1pUbks8W7quhv2JXKYokrEVlF2Nmp5FKscKMMbKsg"
-            ]}
+            images={product.image}
             style={{ width: "100%", height: 200 }}
             loopBothSides
           />
 
           <View style={styles.ProductInfo}>
-            <H3>Adidas Shoe Extreme Edition</H3>
+            <H3>{product.title}</H3>
             <View style={styles.ProductInfoFooter}>
-              <Text style={styles.ProductPrice}>$12.5</Text>
-              <StarRating disabled maxStars={5} rating={2} starSize={21} />
+              <Text style={styles.ProductPrice}>${product.price}</Text>
+              <StarRating
+                disabled
+                maxStars={5}
+                rating={product.rating}
+                starSize={21}
+              />
             </View>
           </View>
 
           <View style={styles.ProductDesc}>
             <Text style={{ padding: 5, color: "grey" }}>Description : </Text>
             <View style={styles.ProductDescContent}>
-              <Text>
-                sdkjfhakjsdhfksjdahflkjdshfkhsdklfjhslakfhksdjh khdsk jfhksdjh
-                kjhs kasdh kdhs ksdhkfha ksjdk hskjdh a
-              </Text>
+              <Text>{product.description}</Text>
               <Text style={{ color: "green" }} onPress={() => alert("pressed")}>
                 Read more
               </Text>
@@ -82,13 +87,19 @@ class ProductDetail extends Component {
             <View style={styles.ProductSellerDetail}>
               <Thumbnail
                 source={{
-                  uri:
-                    "https://www.cloud66.com/assets/testimonials/websummit-f1647e69d145ceb2f4e123268ee48aa72c572ddf62c0e57de4cf35d09ce9ee19.jpg"
+                  uri: product.seller.avatar
                 }}
               />
               <View style={styles.ProductSellerContainer}>
-                <Text style={styles.ProductSellerName}>Adidas Seller</Text>
-                <StarRating disabled maxStars={5} rating={2} starSize={20} />
+                <Text style={styles.ProductSellerName}>
+                  {product.seller.name}
+                </Text>
+                <StarRating
+                  disabled
+                  maxStars={5}
+                  rating={product.seller.rating}
+                  starSize={20}
+                />
               </View>
             </View>
           </View>
@@ -186,4 +197,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProductDetail;
+export default connect(mapStateToProps)(ProductDetail);

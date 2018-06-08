@@ -3,6 +3,8 @@ import axios from "axios";
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
 export const FETCH_PRODUCTS_FAILED = "FETCH_PRODUCTS_FAILED";
+export const GET_DETAIL = "GET_DETAIL";
+export const REMOVE_DETAIL = "REMOVE_DETAIL";
 
 export const FetchStart = () => ({
   type: FETCH_PRODUCTS
@@ -17,6 +19,20 @@ export const FetchSuccess = data => ({
 
 export const FetchFailed = data => ({
   type: FETCH_PRODUCTS_FAILED,
+  payload: {
+    data
+  }
+});
+
+export const getDetail = data => ({
+  type: GET_DETAIL,
+  payload: {
+    data
+  }
+});
+
+export const removeDetail = data => ({
+  type: REMOVE_DETAIL,
   payload: {
     data
   }

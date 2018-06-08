@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { connect } from "react-redux";
 import ProductItem from "../components/ProductItem";
-import { FetchProduct } from "../actions/product";
+import { FetchProduct, getDetail } from "../actions/product";
 
 const mapStateToProps = state => ({
   isFetching: state.product.isFetching,
@@ -35,8 +35,8 @@ class Product extends Component {
     />
   );
 
-  handlePressItem = () => {
-    console.log("pressed");
+  handlePressItem = data => {
+    this.props.dispatch(getDetail(data));
     this.props.navigation.navigate("ProductDetail");
   };
 

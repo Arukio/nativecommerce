@@ -5,7 +5,7 @@ import { Card, CardItem, Text } from "native-base";
 export default ({ handlePress, item }) => (
   <TouchableOpacity
     style={styles.ProductContainer}
-    onPress={() => handlePress()}
+    onPress={() => handlePress(item)}
   >
     <Card>
       <CardItem header>
@@ -14,7 +14,6 @@ export default ({ handlePress, item }) => (
             uri: item.image[0]
           }}
           style={styles.ProductImage}
-          resizeMode="contain"
         />
       </CardItem>
       <CardItem style={{ flexDirection: "column" }}>
