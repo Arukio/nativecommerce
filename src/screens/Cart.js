@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  FlatList
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import {
   Container,
   Header,
@@ -13,14 +7,35 @@ import {
   Button,
   Icon,
   Body,
-  Title,
   Right,
   Text,
   Content
 } from "native-base";
+import { connect } from "react-redux";
 import CartItem from "../components/CartItem";
+import { removeProduct, addQuantity, removeQuantity } from "../actions/cart";
+
+const mapStateToProps = state => ({
+  carts: state.cart.carts
+});
 
 class Cart extends Component {
+  handlePlus = id => {
+    let index = this.props.carts.findIndex(item => item.id === id);
+    this.props.dispatch(addQuantity(index));
+  };
+  handleMinus = id => {
+    let index = this.props.carts.findIndex(item => item.id === id);
+    this.props.dispatch(removeQuantity(index));
+  };
+  handleRemove = id => {
+    let index = this.props.carts.findIndex(item => item.id === id);
+    this.props.dispatch(removeProduct(index));
+  };
+  handleDetail = () => {
+    this.props.navigation.navigate("ProductDetail");
+  };
+
   render() {
     const navigator = this.props.navigation;
     return (
@@ -38,15 +53,17 @@ class Cart extends Component {
         </Header>
         <Content>
           <FlatList
-            data={[
-              { key: "1" },
-              { key: "2" },
-              { key: "3" },
-              { key: "4" },
-              { key: "5" },
-              { key: "6" }
-            ]}
-            renderItem={({ item }) => <CartItem />}
+            keyExtractor={item => item.id.toString()}
+            data={this.props.carts}
+            renderItem={({ item }) => (
+              <CartItem
+                data={item}
+                handleDetail={this.handleDetail}
+                handleMinus={this.handleMinus}
+                handlePlus={this.handlePlus}
+                handleRemove={this.handleRemove}
+              />
+            )}
           />
         </Content>
         <TouchableOpacity
@@ -83,4 +100,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Cart;
+export default connect(mapStateToProps)(Cart);

@@ -2,40 +2,47 @@ import React from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
 import { Icon } from "native-base";
 
-export default () => (
+export default ({
+  data,
+  handlePlus,
+  handleMinus,
+  handleRemove,
+  handleDetail
+}) => (
   <View style={styles.CartItem}>
     <View style={styles.CartItemProduct}>
       <Image
         source={{
-          uri:
-            "https://s7d2.scene7.com/is/image/dkscdn/17ADIWCLDFMQTRCRCLFS_Black_White_is/"
+          uri: data.product.image[0]
         }}
         style={styles.CartItemImage}
       />
-      <Text style={styles.CartItemName}>Adidas Swallow Extreme edition</Text>
-      <Text style={styles.CartItemRemove} onPress={() => alert("pressed")}>
+      <Text style={styles.CartItemName}>{data.product.title}</Text>
+      <Text style={styles.CartItemRemove} onPress={() => handleRemove(data.id)}>
         x
       </Text>
     </View>
     <View style={styles.CartItemPrice}>
-      <Text style={styles.CartItemPriceTag}>$12</Text>
+      <Text style={styles.CartItemPriceTag}>${data.product.price}</Text>
       <View style={styles.CartItemFooter}>
         <View style={styles.CartItemQuantity}>
           <Icon
             name="plus"
             type="FontAwesome"
-            onPress={() => alert("pressed")}
+            onPress={() => handlePlus(data.id)}
             style={styles.CartItemButton}
           />
-          <Text>1</Text>
+          <Text>{data.quantity}</Text>
           <Icon
             name="minus"
             type="FontAwesome"
-            onPress={() => alert("pressed")}
+            onPress={() => handleMinus(data.id)}
             style={styles.CartItemButton}
           />
         </View>
-        <Text style={styles.CartItemDetail}>View Details</Text>
+        <Text style={styles.CartItemDetail} onPress={() => handleDetail()}>
+          View Details
+        </Text>
       </View>
     </View>
   </View>

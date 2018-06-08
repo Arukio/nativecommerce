@@ -16,12 +16,22 @@ import {
 import { connect } from "react-redux";
 import ImageSlider from "react-native-image-slider";
 import StarRating from "react-native-star-rating";
+import { addProduct } from "../actions/cart";
 
 const mapStateToProps = state => ({
   product: state.product.productDetail
 });
 
 class ProductDetail extends Component {
+  handleAddToCart = product => {
+    const data = {
+      quantity: 1,
+      product: this.props.product
+    };
+    this.props.dispatch(addProduct(data));
+    this.props.navigation.navigate("Cart");
+  };
+
   render() {
     const { product } = this.props;
     return (
@@ -108,9 +118,7 @@ class ProductDetail extends Component {
             <Text style={{ padding: 5, color: "grey" }}>Review </Text>
           </View>
         </Content>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Cart")}
-        >
+        <TouchableOpacity onPress={this.handleAddToCart}>
           <View style={styles.AddToCartContainer}>
             <Text style={styles.AddToCartText}>Add To Cart</Text>
           </View>
