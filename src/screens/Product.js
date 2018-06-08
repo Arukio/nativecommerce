@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Image, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, Text, FlatList } from "react-native";
 import {
   Container,
   Header,
@@ -13,7 +13,8 @@ import {
 } from "native-base";
 import { connect } from "react-redux";
 import ProductItem from "../components/ProductItem";
-import { FetchProduct, getDetail } from "../actions/product";
+import { FetchProduct, getDetail, FetchNewProduct } from "../actions/product";
+import FooterTabs from "../components/FooterTabs";
 
 const mapStateToProps = state => ({
   isFetching: state.product.isFetching,
@@ -25,6 +26,10 @@ class Product extends Component {
     this.props.dispatch(FetchProduct());
   };
 
+  renderNextProduct = () => {
+    this.props.dispatch(FetchNewProduct());
+  };
+
   renderItemData = item => (
     <FlatList
       data={this.props.products}
@@ -32,6 +37,8 @@ class Product extends Component {
         <ProductItem handlePress={this.handlePressItem} item={item} />
       )}
       keyExtractor={item => item.title.toString()}
+      onEndReachedThreshold={4}
+      onEndReached={this.renderNextProduct}
     />
   );
 
@@ -47,7 +54,11 @@ class Product extends Component {
     return (
       <Container>
         <Header style={styles.Header}>
-          <Left />
+          <Left>
+            <Button transparent onPress={() => this.openDrawer()}>
+              <Icon name="menu" style={styles.BackIcon} />
+            </Button>
+          </Left>
           <Body>
             <Title>Products</Title>
           </Body>
@@ -61,7 +72,8 @@ class Product extends Component {
             </Button>
           </Right>
         </Header>
-        <Content style={styles.Content}>{renderProduct}</Content>
+        {this.renderItemData()}
+        <FooterTabs navigator={this.props.navigation} />
       </Container>
     );
   }

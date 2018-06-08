@@ -8,12 +8,15 @@ import {
   Body,
   Title,
   Text,
-  Content
+  Content,
+  Footer,
+  FooterTab
 } from "native-base";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import ImagePicker from "react-native-image-picker";
 import ProfileImage from "../components/ProfileImage";
 import ProfileItemMenu from "../components/ProfileItemMenu";
+import FooterTabs from "../components/FooterTabs";
 
 class Profile extends Component {
   state = {
@@ -47,7 +50,10 @@ class Profile extends Component {
         >
           <Header style={styles.Header}>
             <Left>
-              <Button transparent>
+              <Button
+                transparent
+                onPress={() => this.props.navigation.goBack()}
+              >
                 <Icon name="arrow-back" />
                 <Title> Account</Title>
               </Button>
@@ -85,6 +91,7 @@ class Profile extends Component {
             redirectTo="Order"
           />
         </Content>
+        <FooterTabs navigator={this.props.navigation} />
       </Container>
     );
   }
