@@ -5,12 +5,14 @@ import auth from "./reducers/authReducers";
 import product from "./reducers/productReducers";
 import cart from "./reducers/cartReducers";
 import seller from "./reducers/sellerReducers";
+import favorite from "./reducers/favoriteReducers";
 
 const RootReducers = combineReducers({
   auth,
   product,
   cart,
-  seller
+  seller,
+  favorite
 });
 
 const store = createStore(

@@ -8,9 +8,9 @@ export default ({ navigator }) => (
         <Icon name="home" onPress={() => navigator.navigate("Product")} />
         <Text>Home</Text>
       </Button>
-      <Button vertical>
+      <Button vertical onPress={() => navigator.navigate("Favorite")}>
         <Icon name="favorite" type="MaterialIcons" />
-        <Text>Whistlist</Text>
+        <Text>Favorite</Text>
       </Button>
       <Button vertical onPress={() => navigator.navigate("Cart")}>
         <Icon active name="cart" />

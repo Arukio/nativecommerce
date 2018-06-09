@@ -11,19 +11,25 @@ import {
   Right,
   Content,
   H3,
-  Thumbnail
+  Thumbnail,
+  Toast
 } from "native-base";
 import { connect } from "react-redux";
 import ImageSlider from "react-native-image-slider";
 import StarRating from "react-native-star-rating";
 import { addProduct } from "../actions/cart";
 import { FetchSeller } from "../actions/seller";
+import { addFavorite } from "../actions/favorite";
 
 const mapStateToProps = state => ({
   product: state.product.productDetail
 });
 
 class ProductDetail extends Component {
+  state = {
+    showToast: false
+  };
+
   handleAddToCart = product => {
     const data = {
       quantity: 1,
@@ -36,6 +42,14 @@ class ProductDetail extends Component {
   handleGetSeller = data => {
     this.props.dispatch(FetchSeller(data));
     this.props.navigation.navigate("Seller");
+  };
+
+  handleAddtoFavorite = data => {
+    this.props.dispatch(addFavorite(data));
+    Toast.show({
+      text: "Added To Favorite",
+      buttonText: "Done"
+    });
   };
 
   render() {
@@ -74,7 +88,6 @@ class ProductDetail extends Component {
             style={{ width: "100%", height: 200 }}
             loopBothSides
           />
-
           <View style={styles.ProductInfo}>
             <H3>{product.title}</H3>
             <View style={styles.ProductInfoFooter}>
@@ -87,7 +100,12 @@ class ProductDetail extends Component {
               />
             </View>
           </View>
-
+          <TouchableOpacity
+            style={styles.Favorite}
+            onPress={() => this.handleAddtoFavorite(product)}
+          >
+            <Icon name="heart" />
+          </TouchableOpacity>
           <View style={styles.ProductDesc}>
             <Text style={{ padding: 5, color: "grey" }}>Description : </Text>
             <View style={styles.ProductDescContent}>
@@ -145,6 +163,19 @@ const styles = StyleSheet.create({
   },
   BackIcon: {
     color: "black"
+  },
+  Favorite: {
+    position: "absolute",
+    alignItems: "flex-end",
+    width: 60,
+    height: 60,
+    backgroundColor: "#3E92CC",
+    alignSelf: "flex-end",
+    top: 170,
+    left: 300,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center"
   },
   ProductInfo: {
     flex: 1,
