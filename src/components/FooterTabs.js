@@ -12,7 +12,7 @@ export default ({ navigator }) => (
         <Icon name="favorite" type="MaterialIcons" />
         <Text>Whistlist</Text>
       </Button>
-      <Button vertical>
+      <Button vertical onPress={() => navigator.navigate("Cart")}>
         <Icon active name="cart" />
         <Text>My Cart</Text>
       </Button>

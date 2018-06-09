@@ -54,11 +54,7 @@ class Product extends Component {
     return (
       <Container>
         <Header style={styles.Header}>
-          <Left>
-            <Button transparent onPress={() => this.openDrawer()}>
-              <Icon name="menu" style={styles.BackIcon} />
-            </Button>
-          </Left>
+          <Left />
           <Body>
             <Title>Products</Title>
           </Body>

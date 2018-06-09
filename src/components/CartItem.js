@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   CartItemRemove: {
-    marginRight: 10
+    marginRight: 10,
+    fontSize: 20
   },
   CartItemPrice: {
     alignItems: "flex-end"

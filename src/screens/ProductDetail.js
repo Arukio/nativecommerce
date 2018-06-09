@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import ImageSlider from "react-native-image-slider";
 import StarRating from "react-native-star-rating";
 import { addProduct } from "../actions/cart";
+import { FetchSeller } from "../actions/seller";
 
 const mapStateToProps = state => ({
   product: state.product.productDetail
@@ -30,6 +31,11 @@ class ProductDetail extends Component {
     };
     this.props.dispatch(addProduct(data));
     this.props.navigation.navigate("Cart");
+  };
+
+  handleGetSeller = data => {
+    this.props.dispatch(FetchSeller(data));
+    this.props.navigation.navigate("Seller");
   };
 
   render() {
@@ -94,7 +100,10 @@ class ProductDetail extends Component {
 
           <View style={styles.ProductSeller}>
             <Text style={{ padding: 5, color: "grey" }}>Seller </Text>
-            <View style={styles.ProductSellerDetail}>
+            <TouchableOpacity
+              style={styles.ProductSellerDetail}
+              onPress={() => this.handleGetSeller(product)}
+            >
               <Thumbnail
                 source={{
                   uri: product.seller.avatar
@@ -104,14 +113,16 @@ class ProductDetail extends Component {
                 <Text style={styles.ProductSellerName}>
                   {product.seller.name}
                 </Text>
-                <StarRating
-                  disabled
-                  maxStars={5}
-                  rating={product.seller.rating}
-                  starSize={20}
-                />
+                <View style={{ width: 100 }}>
+                  <StarRating
+                    disabled
+                    maxStars={5}
+                    rating={product.seller.rating}
+                    starSize={20}
+                  />
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.ProductReview}>
