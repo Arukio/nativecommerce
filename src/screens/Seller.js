@@ -22,16 +22,24 @@ import {
 import { connect } from "react-redux";
 import StarRating from "react-native-star-rating";
 import ProductItem from "../components/ProductItem";
+import { getDetail } from "../actions/product";
 
 const mapStateToProps = state => ({
   seller: state.seller.seller
 });
 
 class Seller extends Component {
+  handlePressProduct = data => {
+    this.props.dispatch(getDetail(data));
+    this.props.navigation.navigate("ProductDetail");
+  };
+
   renderProduct = () => (
     <FlatList
       data={this.props.seller.products}
-      renderItem={({ item }) => <ProductItem item={item} />}
+      renderItem={({ item }) => (
+        <ProductItem item={item} handlePress={this.handlePressProduct} />
+      )}
       keyExtractor={(item, index) => index.toString()}
     />
   );
