@@ -32,7 +32,6 @@ class ProductDetail extends Component {
 
   handleAddToCart = product => {
     const data = {
-      quantity: 1,
       product: this.props.product
     };
     this.props.dispatch(addProduct(data));

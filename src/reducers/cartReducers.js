@@ -12,13 +12,20 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return {
-        ...state,
-        carts: [
-          ...state.carts,
-          { id: state.carts.length + 1, ...action.payload.data }
-        ]
-      };
+      let idx = state.carts.findIndex(
+        item => item.product === action.payload.data.product
+      );
+      if (idx === -1) {
+        return {
+          ...state,
+          carts: [
+            ...state.carts,
+            { id: state.carts.length + 1, quantity: 1, ...action.payload.data }
+          ]
+        };
+      } else {
+        return state;
+      }
     case REMOVE_PRODUCT:
       const index = action.payload.data;
       return {
