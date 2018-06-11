@@ -6,6 +6,7 @@ import Cart from "../screens/Cart";
 import Shipping from "../screens/Shipping";
 import Seller from "../screens/Seller";
 import Favorite from "../screens/Favorite";
+import Payment from "../screens/Payment";
 
 const Root = createStackNavigator(
   {
@@ -15,7 +16,8 @@ const Root = createStackNavigator(
     Profile: Profile,
     Cart: Cart,
     Seller: Seller,
-    Favorite: Favorite
+    Favorite: Favorite,
+    Payment: Payment
   },
   {
     headerMode: "none",

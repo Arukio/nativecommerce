@@ -1,23 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import {
   Container,
   Header,
   Left,
   Button,
-  Icon,
-  Body,
   Title,
   Right,
-  Content,
-  Textarea
+  Icon,
+  Body,
+  Content
 } from "native-base";
 
-class Shipping extends Component {
-  state = {
-    text: ""
-  };
-
+class Payment extends Component {
   render() {
     return (
       <Container>
@@ -28,7 +23,7 @@ class Shipping extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>Shipping</Title>
+            <Title>Payment</Title>
           </Body>
           <Right />
         </Header>
@@ -49,29 +44,34 @@ class Shipping extends Component {
               />
             </View>
           </View>
-
-          <View style={styles.ShippinAddress}>
-            <Text>Your Shipping Address</Text>
-            <Text style={{ color: "grey", marginTop: 5 }}>Primary Address</Text>
-            <Textarea
-              rowSpan={5}
-              bordered
-              onChangeText={text => this.setState({ text })}
-            />
+          <View style={styles.CreditCard}>
+            <Text style={styles.CreditCardText}>Card Number</Text>
+            <TextInput style={styles.Input} placeholder="xxxx-xxxx-xxxx-xxxx" />
+            <Text style={styles.CreditCardText}>Card Name</Text>
+            <TextInput style={styles.Input} placeholder="Jhon doe" />
+            <View style={styles.CreditCardFooter}>
+              <View>
+                <Text style={styles.CreditCardText}>MM</Text>
+                <TextInput style={[styles.Input, { width: 60 }]} />
+              </View>
+              <View>
+                <Text style={styles.CreditCardText}>YY</Text>
+                <TextInput style={[styles.Input, { width: 60 }]} />
+              </View>
+              <View>
+                <Text style={styles.CreditCardText}>CVV</Text>
+                <TextInput style={[styles.Input, { width: 60 }]} />
+              </View>
+            </View>
           </View>
-          <Button
-            style={styles.Button}
-            onPress={() => this.props.navigation.navigate("Payment")}
-            primary
-          >
-            <Text style={styles.ButtonText}>Proceed Payments</Text>
+          <Button style={styles.Button} primary>
+            <Text style={styles.ButtonText}>Make Payment</Text>
           </Button>
         </Content>
       </Container>
     );
   }
 }
-
 const styles = StyleSheet.create({
   Header: {
     backgroundColor: "#3E92CC"
@@ -100,11 +100,25 @@ const styles = StyleSheet.create({
     top: 45,
     marginHorizontal: 20
   },
-  ShippinAddress: {
+  CreditCard: {
     backgroundColor: "white",
-    marginHorizontal: 20,
-    height: 200,
-    padding: 10
+    height: 230,
+    marginHorizontal: 15
+  },
+  CreditCardText: {
+    fontSize: 18,
+    marginVertical: 5,
+    marginHorizontal: 10
+  },
+  Input: {
+    borderColor: "#E5E2E7",
+    borderWidth: 2,
+    height: 40,
+    marginHorizontal: 10,
+    fontSize: 15
+  },
+  CreditCardFooter: {
+    flexDirection: "row"
   },
   Button: {
     alignSelf: "center",
@@ -114,8 +128,8 @@ const styles = StyleSheet.create({
   ButtonText: {
     color: "white",
     fontWeight: "bold",
-    paddingHorizontal: 100
+    paddingHorizontal: 120
   }
 });
 
-export default Shipping;
+export default Payment;
