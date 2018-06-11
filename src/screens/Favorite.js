@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import FooterTabs from "../components/FooterTabs";
 import FavoriteItem from "../components/FavoriteItem";
 import { getDetail } from "../actions/product";
+import { removeFavorite } from "../actions/favorite";
 
 const mapStateToProps = state => ({
   favorite: state.favorite.favorites
@@ -26,7 +27,7 @@ class Favorite extends Component {
   };
 
   handleRemove = data => {
-    console.log(data);
+    this.props.dispatch(removeFavorite(data));
   };
   render() {
     return (

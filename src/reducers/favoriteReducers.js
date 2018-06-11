@@ -1,4 +1,4 @@
-import { ADD_FAVORITE } from "../actions/favorite";
+import { ADD_FAVORITE, REMOVE_FAVORITE } from "../actions/favorite";
 
 const initialState = {
   favorites: []
@@ -17,6 +17,15 @@ export default (state = initialState, action) => {
       } else {
         return state;
       }
+    case REMOVE_FAVORITE:
+      let idx = state.favorites.findIndex(item => item.id === action.payload);
+      return {
+        ...state,
+        favorites: [
+          ...state.favorites.slice(0, idx),
+          ...state.favorites.slice(idx + 1)
+        ]
+      };
     default:
       return state;
   }
