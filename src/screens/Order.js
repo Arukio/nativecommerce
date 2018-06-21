@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList } from "react-native";
 import {
   Container,
   Header,
@@ -11,7 +11,12 @@ import {
   Button,
   Content
 } from "native-base";
+import { connect } from "react-redux";
 import OrderItem from "../components/OrderItem";
+
+const mapStateToProps = state => ({
+  orderItem: state.order.data
+});
 
 class Order extends Component {
   render() {
@@ -19,7 +24,10 @@ class Order extends Component {
       <Container>
         <Header style={styles.Header}>
           <Left>
-            <Button onPress={() => this.props.navigation.goBack()} transparent>
+            <Button
+              onPress={() => this.props.navigation.navigate("Product")}
+              transparent
+            >
               <Icon name="arrow-back" style={styles.blackIcon} />
             </Button>
           </Left>
@@ -29,8 +37,11 @@ class Order extends Component {
           <Right />
         </Header>
         <Content>
-          <OrderItem />
-          <OrderItem />
+          <FlatList
+            data={this.props.orderItem}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => <OrderItem item={item} />}
+          />
         </Content>
       </Container>
     );
@@ -46,4 +57,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Order;
+export default connect(mapStateToProps)(Order);

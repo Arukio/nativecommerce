@@ -24,7 +24,7 @@ class Profile extends Component {
   };
 
   handleNavigation = page => {
-    console.log(page);
+    this.props.navigation.navigate(page);
   };
 
   handleChangeAvatar = () => {
@@ -72,7 +72,7 @@ class Profile extends Component {
         <Content>
           <ProfileItemMenu
             name="My order"
-            handlePress={this.handleNavigation}
+            handlePress={() => this.handleNavigation("Order")}
             redirectTo="Order"
           />
           <ProfileItemMenu

@@ -23,7 +23,7 @@ const Root = createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: "Order"
+    initialRouteName: "Product"
   }
 );
 

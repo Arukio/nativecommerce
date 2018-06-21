@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { Button, Icon } from "native-base";
+import moment from "moment";
 
-export default () => (
+export default ({ item }) => (
   <View style={styles.ItemContainer}>
     <View style={styles.OrderTop}>
       <View style={styles.OrderTopText}>
@@ -18,20 +19,19 @@ export default () => (
         <Image
           style={styles.OrderImage}
           source={{
-            uri:
-              "https://cdn.shopify.com/s/files/1/0660/7355/products/Royal-Enfield-Urban-Scout-Jacket-Khakhi-Brown-1_800x.jpg?v=1521699915"
+            uri: item.product.image[0]
           }}
         />
-        <View>
-          <Text style={styles.ProductTitle}>
-            Jacket Bulletproof ultra edition
-          </Text>
+        <View style={{ marginLeft: 10 }}>
+          <Text style={styles.ProductTitle}>{item.product.title}</Text>
           <View style={{ flexDirection: "row" }}>
             <View>
               <Text style={styles.Status}>Status:</Text>
               <Text style={[styles.Status, { color: "green" }]}>On Proces</Text>
               <Text style={styles.Status}>Expected at: 25 July 2018</Text>
-              <Text style={styles.Status}>Last Update at: 25 July 2018</Text>
+              <Text style={styles.Status}>
+                Last Update at: {moment().format("DD MMMM YYYY")}
+              </Text>
             </View>
             <Button transparent>
               <Icon name="refresh" style={{ height: 20, width: 20 }} />

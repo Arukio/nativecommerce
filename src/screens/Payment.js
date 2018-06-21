@@ -11,8 +11,19 @@ import {
   Body,
   Content
 } from "native-base";
+import { connect } from "react-redux";
+import { proccedOrder } from "../actions/order";
+
+const mapStateToProps = state => ({
+  carts: state.cart.carts
+});
 
 class Payment extends Component {
+  handleOrder = () => {
+    this.props.dispatch(proccedOrder(this.props.carts));
+    this.props.navigation.navigate("Order");
+  };
+
   render() {
     return (
       <Container>
@@ -64,7 +75,7 @@ class Payment extends Component {
               </View>
             </View>
           </View>
-          <Button style={styles.Button} primary>
+          <Button style={styles.Button} primary onPress={this.handleOrder}>
             <Text style={styles.ButtonText}>Make Payment</Text>
           </Button>
         </Content>
@@ -132,4 +143,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Payment;
+export default connect(mapStateToProps)(Payment);

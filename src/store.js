@@ -6,13 +6,15 @@ import product from "./reducers/productReducers";
 import cart from "./reducers/cartReducers";
 import seller from "./reducers/sellerReducers";
 import favorite from "./reducers/favoriteReducers";
+import order from "./reducers/orderReducers";
 
 const RootReducers = combineReducers({
   auth,
   product,
   cart,
   seller,
-  favorite
+  favorite,
+  order
 });
 
 const store = createStore(
